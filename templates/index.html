@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Waifu ChatBot</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="title">Welcome to the wAIfu Interactive ChatBot!</div>
+      <div id="chat-box"></div>
+      <input
+        type="text"
+        id="user-input"
+        placeholder="Enter bot's name and press Enter..."
+        onkeydown="if(event.keyCode === 13) setBotName()"
+      />
+    </div>
+
+    <script>
+      var botName = "";
+
+      function setBotName() {
+        var botNameInput = document.getElementById("user-input").value.trim();
+        if (botNameInput !== "") {
+          botName = botNameInput + ": ";
+          document.getElementById("user-input").value = "";
+          document.getElementById("user-input").placeholder =
+            "Type your message here...";
+          document.getElementById("user-input").onkeydown = function (event) {
+            if (event.keyCode === 13) sendMessage();
+          };
+        }
+      }
+
+      function displayMessage(message) {
+        var chatBox = document.getElementById("chat-box");
+        var messageElement = document.createElement("p");
+        messageElement.innerHTML =
+          '<span id="bot-name">' + botName + "</span>" + message;
+        chatBox.appendChild(messageElement);
+
+        // Scroll to the bottom of the chat box
+        chatBox.scrollTop = chatBox.scrollHeight - chatBox.clientHeight;
+
+        // Check if content exceeds height, remove earlier messages if necessary
+        while (chatBox.scrollHeight > chatBox.clientHeight) {
+          chatBox.removeChild(chatBox.firstChild);
+        }
+      }
+
+      function sendMessage() {
+        var userInput = document.getElementById("user-input").value;
+        var chatBox = document.getElementById("chat-box");
+        var userMessage = "<p>You: " + userInput + "</p>";
+        chatBox.innerHTML += userMessage;
+
+        fetch("/send-message", {
+          method: "POST",
+          body: JSON.stringify({ message: userInput }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.message.includes("No has answer, plz tell ;-;")) {
+              waitForResponse(userInput);
+            } else {
+              displayMessage(data.message);
+            }
+          });
+
+        document.getElementById("user-input").value = "";
+      }
+      
+      function waitForResponse(question) {
+        var responseInput = document.createElement("input");
+        responseInput.type = "text";
+        responseInput.placeholder = "Enter response and press Enter...";
+        responseInput.onkeydown = function (event) {
+          if (event.keyCode === 13) addResponse(question, responseInput.value);
+        };
+
+        // Find the user message element and insert the response input after it
+        var userMessageElement = document.querySelector(
+          "#chat-box p:last-child"
+        );
+        userMessageElement.insertAdjacentElement("afterend", responseInput);
+        responseInput.focus();
+      }
+
+      function addResponse(question, answer) {
+        fetch("/add-response", {
+          method: "POST",
+          body: JSON.stringify({ question: question, answer: answer }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            displayMessage("okie, i'll remember this :)");
+          });
+      }
+    </script>
+  </body>
+</html>

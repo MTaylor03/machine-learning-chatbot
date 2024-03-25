@@ -1,0 +1,37 @@
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Hide overflow for the container */
+}
+
+.container .title {
+    max-width: 600px;
+    margin: 10px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 200;
+}
+
+#chat-box {
+    position: relative;
+    height: 300px; /* Change max-height to height */
+    overflow-y: auto; /* Change to auto */
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Align messages to the bottom */
+}
+
+#chat-box p {
+    margin: 0; /* Add to remove default margin */
+    overflow-wrap: break-word; /* Add to wrap long words */
+}
