@@ -52,8 +52,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
-    color:  #7a00fc;
-    -webkit-text-stroke: 1px rgb(0, 0, 0); /* Set the outline width and color */
+    color:  #8ff2ff;
     font-size: 30px;
     font-weight: 200;
 }
@@ -100,6 +99,6 @@ input::placeholder {
 /* Style for input when it's focused */
 input:focus {
     outline: none; /* Remove default focus outline */
-    border-color: #7a00fc; /* Border color when focused */
+    border-color: #00bdfc; /* Border color when focused */
     /*box-shadow: 0 0 5px #f02133; Add a shadow when focused */
 }
