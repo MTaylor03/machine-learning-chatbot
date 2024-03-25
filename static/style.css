@@ -1,29 +1,70 @@
+* {
+    font-family: consolas;
+    box-sizing: border-box;
+  }
+  
+  body {
+    background: #020202da;
+    max-width: 800px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+/* Define scrollbar colors and styles */
+:root {
+    --scrollbar-track-color: #f0f0f0; /* Color of the scrollbar track */
+    --scrollbar-thumb-color: #888; /* Color of the scrollbar thumb */
+    --scrollbar-thumb-hover-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+/* Style the scrollbar */
+#chat-box::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+}
+
+#chat-box::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color); /* Color of the scrollbar track */
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color); /* Color of the scrollbar thumb */
+    border-radius: 5px; /* Rounded corners of the scrollbar thumb */
+}
+
+#chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scrollbar-thumb-hover-color); /* Color of the scrollbar thumb on hover */
+}
+
 .container {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
+    max-width: 80%;
+    margin: 15px auto;
+    padding: 15px;
     border: 1px solid #ccc;
+    background-color: #222525;
     border-radius: 5px;
     overflow: hidden; /* Hide overflow for the container */
 }
 
 .container .title {
     max-width: 600px;
-    margin: 10px auto;
-    padding: 20px;
+    background-color: #272f30;
+    margin: 15px auto;
+    padding: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
+    color:  #7a00fc;
+    -webkit-text-stroke: 1px rgb(0, 0, 0); /* Set the outline width and color */
     font-size: 30px;
     font-weight: 200;
 }
 
 #chat-box {
     position: relative;
-    height: 300px; /* Change max-height to height */
+    height: 425px; /* Change max-height to height */
     overflow-y: auto; /* Change to auto */
     border: 1px solid #ddd;
     padding: 10px;
+    color: hsl(0, 0%, 100%);
     margin-bottom: 10px;
     text-align: left;
     display: flex;
@@ -34,4 +75,31 @@
 #chat-box p {
     margin: 0; /* Add to remove default margin */
     overflow-wrap: break-word; /* Add to wrap long words */
+}
+/* Style for all input elements */
+input {
+    padding: 10px; /* Padding inside the input box */
+    border: 1px solid #ccc; /* Border color and width */
+    background: #333;
+    border-radius: 5px; /* Rounded corners */
+    font-size: 16px; /* Font size */
+}
+
+/* Style for specific input elements */
+#user-input {
+    width: 60%; /* Set the width of the input box */
+    margin-top: 10px; /* Add margin */
+    color: #f8f8f8;
+}
+
+/* Style for placeholder text */
+input::placeholder {
+    color: #999; /* Placeholder text color */
+}
+
+/* Style for input when it's focused */
+input:focus {
+    outline: none; /* Remove default focus outline */
+    border-color: #7a00fc; /* Border color when focused */
+    /*box-shadow: 0 0 5px #f02133; Add a shadow when focused */
 }
