@@ -102,3 +102,9 @@ input:focus {
     border-color: #00bdfc; /* Border color when focused */
     /*box-shadow: 0 0 5px #f02133; Add a shadow when focused */
 }
+
+#response-input {
+    width: 60%; /* Set the width of the input box */
+    margin-top: 10px; /* Add margin */
+    color: #f8f8f8;
+}

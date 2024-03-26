@@ -23,7 +23,7 @@ def send_message():
     if response:
         answer = BotLogic.show_match(response, database)
     else:
-        answer = "no has answer, plz tell ;-;"
+        answer = "No has answer, plz tell ;-;"
 
     return jsonify({"message": answer})
 

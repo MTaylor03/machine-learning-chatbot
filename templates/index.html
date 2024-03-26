@@ -70,6 +70,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.message.includes("No has answer, plz tell ;-;")) {
+              displayMessage("no has answer, plz tell ;-;");
               waitForResponse(userInput);
             } else {
               displayMessage(data.message);
@@ -78,20 +79,32 @@
 
         document.getElementById("user-input").value = "";
       }
-      
+
       function waitForResponse(question) {
+        // Hide the default input
+        var defaultInput = document.getElementById("user-input");
+        defaultInput.style.display = "none";
+
+        // Create a new input element with ID response-input
         var responseInput = document.createElement("input");
         responseInput.type = "text";
-        responseInput.placeholder = "Enter response and press Enter...";
-        responseInput.onkeydown = function (event) {
-          if (event.keyCode === 13) addResponse(question, responseInput.value);
-        };
+        responseInput.id = "response-input"; // Set ID for styling
+        responseInput.placeholder = "Type your response here...";
 
-        // Find the user message element and insert the response input after it
-        var userMessageElement = document.querySelector(
-          "#chat-box p:last-child"
-        );
-        userMessageElement.insertAdjacentElement("afterend", responseInput);
+        responseInput.addEventListener("keydown", function (event) {
+          if (event.keyCode === 13) {
+            addResponse(question, responseInput.value);
+            // Remove the new input field
+            responseInput.parentNode.removeChild(responseInput);
+            // Show the default input again
+            defaultInput.style.display = "block";
+          }
+        });
+
+        // Insert the new input box into the DOM
+        defaultInput.parentNode.insertBefore(responseInput, defaultInput);
+
+        // Set focus on the new input field
         responseInput.focus();
       }
 
