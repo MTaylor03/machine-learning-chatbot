@@ -1,4 +1,4 @@
-# wAIfu
+# Machine Learning Chatbot
 Interactive ChatBot With Modern Language Design
 
 # Required Libraries: 
