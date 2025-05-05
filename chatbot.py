@@ -23,7 +23,7 @@ def send_message():
     if response:
         answer = BotLogic.show_match(response, database)
     else:
-        answer = "No has answer, plz tell ;-;"
+        answer = "No answer found, enter one now."
 
     return jsonify({"message": answer})
 
@@ -35,7 +35,7 @@ def add_response():
     database["questions"].append({"question": user_input, "answer": new_response})
     BotLogic.save_database('data_base.json', database)
 
-    return jsonify({"message": "okie, i\'ll remember this :)"})
+    return jsonify({"message": "Answer recorded."})
 
 if __name__ == "__main__":
     app.run(debug = True)
